@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>ProMan - Personal Portfolio HTML Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <!-- <link href="img/favicon.ico" rel="icon"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+ 
+    <style>
+        /* تحديد التأثيرات فقط داخل الكلاس الرئيسي Boox */
+        .Boox * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .Boox {
+            background: #061119;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .Boox .modal-container {
+            display: block;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            animation: fadeInBackground 0.5s ease-in-out;
+        }
+
+        @keyframes fadeInBackground {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .Boox .modal-content {
+            background: linear-gradient(145deg, #08b5c1, #e9e4f0);
+            margin: auto;
+            padding: 40px;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            position: relative;
+            animation: fadeInModal 0.5s ease-in-out;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        @keyframes fadeInModal {
+            from { transform: translateY(-60%); opacity: 0; }
+            to { transform: translateY(-50%); opacity: 1; }
+        }
+
+        .Boox .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #444;
+            transition: all 0.5s ease;    
+        }
+
+        .Boox .close-btn:hover {
+            color: #e74c3c;
+            transform: rotate(180deg);
+        }
+
+        .Boox .modal-text p {
+            font-size: 20px;
+            line-height: 1.8;
+            margin: 15px 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            color: #333;
+        }
+
+        .Boox .modal-text p:first-child {
+            font-size: 24px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-style: italic;
+        }
+
+        .Boox .modal-text p:nth-child(2) {
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-size: 32px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .Boox .modal-text p:nth-child(3) {
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+
+        .Boox .modal-text p:hover {
+            transform: scale(1.02);
+            color: #2980b9;
+        }
+
+        .Boox .close-btn-text {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(145deg, #3498db, #2980b9);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }   
+
+        .Boox .close-btn-text:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .timeline-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-title {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 50px;
+            font-size: 2.8em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            position: relative;
+            padding-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .timeline-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #2980b9);
+            border-radius: 4px;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 30px 0;
+            width: 100%;
+            overflow: hidden;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .timeline-progress {
+            position: absolute;
+            height: 8px;
+            background: linear-gradient(90deg, #3498db, #2980b9);
+            top: 50px;
+            left: 0;
+            width: 100%;
+            border-radius: 4px;
+            z-index: 1;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .timeline-items {
+            display: flex;
+            padding: 60px 0;
+            position: relative;
+            z-index: 2;
+            gap: 40px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: thin;
+            scrollbar-color: #3498db #f8f9fa;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Custom scrollbar styling */
+        .timeline-items::-webkit-scrollbar {
+            height: 8px;
+            width: 8px;
+        }
+
+        .timeline-items::-webkit-scrollbar-track {
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+
+        .timeline-items::-webkit-scrollbar-thumb {
+            background: linear-gradient(90deg, #3498db, #2980b9);
+            border-radius: 4px;
+            border: 2px solid #f8f9fa;
+        }
+
+        .timeline-items::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(90deg, #2980b9, #3498db);
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+        }
+
+        .timeline-item {
+            flex: 0 0 350px;
+            min-width: 350px;
+            scroll-snap-align: start;
+            transform: scale(0.95);
+            transition: all 0.4s ease;
+            height: 100%;
+        }
+
+        .timeline-item:hover {
+            transform: scale(1);
+        }
+
+        .timeline-dot {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 0 6px #fff, 0 0 0 8px #3498db;
+            transition: all 0.4s ease;
+            z-index: 3;
+        }
+
+        .timeline-dot i {
+            color: #3498db;
+            font-size: 1.4em;
+            transition: all 0.4s ease;
+        }
+
+        .timeline-item:hover .timeline-dot {
+            box-shadow: 0 0 0 6px #fff, 0 0 0 8px #2980b9;
+        }
+
+        .timeline-item:hover .timeline-dot i {
+            transform: scale(1.2);
+            color: #2980b9;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-top: 50px;
+            transition: all 0.4s ease;
+            height: 450px;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .timeline-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            transition: all 0.4s ease;
+        }
+
+        .timeline-content:hover .timeline-image {
+            transform: scale(1.03);
+        }
+
+        .timeline-date {
+            color: #3498db;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .timeline-content h2 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.5em;
+            font-weight: 700;
+        }
+
+        .timeline-content p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 1em;
+            flex-grow: 1;
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 768px) {
+            .timeline-container {
+                padding: 20px;
+            }
+
+            .timeline-title {
+                font-size: 2.2em;
+            }
+
+            .timeline-item {
+                min-width: 280px;
+            }
+
+            .timeline-content {
+                padding: 20px;
+            }
+
+            .timeline-image {
+                height: 180px;
+            }
+
+            .Boox .modal-content {
+                width: 95%;
+                padding: 30px;
+            }
+
+            .Boox .modal-text p {
+                font-size: 18px;
+            }
+
+            .Boox .modal-text p:nth-child(2) {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="51">
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner" style="width: 50px; height: 50px; border: 3px solid #f3f3f3; border-top: 3px solid #3498db; border-radius: 50%; animation: spin 1s linear infinite;">
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+
+
+
+
+    <!-- Header Start -->
+    <div class="container-fluid bg-light my-6 mt-0" id="home">
+        <div class="container">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-6 py-6 pb-0 pt-lg-0">
+                    
+                    <h1 class="display-3 mb-3" style="font-size: 50px;">Happy 20 <sup>th</sup> Brithday </h1>
+                    <h2 class="typed-text-output d-inline"></h2>
+                    <div class="typed-text d-none">Dr/Esraa Mostafa , Saqr Basha</div>
+                    <div class="d-flex align-items-center pt-5">
+                        <div class="years" style="text-align: center; padding: 20px; background:rgb(250, 250, 251); border-radius: 10px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);">
+                            <h1 class="display-1" style="font-size: 4rem; margin-bottom: 10px; color: #ff6f61;">5+</h1>
+                            <h5 style="font-size: 1.5rem; margin-bottom: 10px; color: #555;">Years of Friendship</h5>
+                            <p style="font-size: 1.2rem; color: #777;">More than a 5 yeas of laughter, adventures, and unforgettable memories!</p>
+                        </div>
+                       
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img class="img-fluid" src="Esraa3.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+
+    <div class="timeline-container">
+        <h1 class="timeline-title">Our Journey Together</h1>
+        <div class="timeline" style="overflow-x: auto; -webkit-overflow-scrolling: touch; scroll-behavior: smooth;">
+            <div class="timeline-progress"></div>
+            <div class="timeline-items" style="display: flex; gap: 30px; padding: 20px 0;">
+                <div class="timeline-item" style="flex: 0 0 300px; min-width: 300px;">
+                    <div class="timeline-dot">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <img src="mozakra.jpg" alt="First Meeting" class="timeline-image">
+                        <div class="timeline-date">2023</div>
+                        <h2>ثانويه عامه </h2>
+                        <p>كنت عاوز اجيب حاجه من زمان سيكا ومفيش اوسخ واقدم حاجه كنا بنتشاركها قد ثاويه عامه</p>
+                    </div>
+                </div>
+                <div class="timeline-item" style="flex: 0 0 300px; min-width: 300px;">
+                    <div class="timeline-dot">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <img src="first.jpg" alt="Special Moment" class="timeline-image">
+                        <div class="timeline-date">11/1/2024</div>
+                        <h2>أول خروجه لوحدنا</h2>
+                        <p>...بعيدا عن شكلنا يومها يعني </p>
+                    </div>
+                </div>
+                <div class="timeline-item" style="flex: 0 0 300px; min-width: 300px;">
+                    <div class="timeline-dot">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <img src="Mall.jpg" alt="Adventure" class="timeline-image">
+                        <div class="timeline-date">City Stars Mall</div>
+                        <h2>يوجع السيتي ستارز والفيلم اللي طار</h2>
+                        <p>بس كلنا بافلو وشربنا ايس كوفيي  (غير حكايتنا)</p>
+                    </div>
+                    
+                </div>
+                <div class="timeline-item" style="flex: 0 0 300px; min-width: 300px;">
+                    <div class="timeline-dot">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <img src="call.jpg" alt="Adventure" class="timeline-image">
+                        <div class="timeline-date">24/3/2024-17/3/2025</div>
+                        <h2>الذكري الثانويه علي انك اكتر شخص بكلمه كووووول</h2>
+                        <p> ♥️...يارب دايما </p>
+                    </div>
+                    
+                </div>
+                <div class="timeline-item" style="flex: 0 0 300px; min-width: 300px;">
+                    <div class="timeline-dot">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <img src="cook.jpg" alt="Adventure" class="timeline-image">
+                        <div class="timeline-date">21/4/2025</div>
+                        <h2>لاااا وطباااخه محترفه كمان</h2>
+                        <p>احب ابدي اعجااااابي للمره المليون باول اكله اسرااء اللي عملهالي +فيين الكنتلوبب في الصوره</p>
+                    </div>
+                    
+                </div>
+                <div class="timeline-item" style="flex: 0 0 300px; min-width: 300px;">
+                    <div class="timeline-dot">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <img src="Call2.jpg" alt="Adventure" class="timeline-image">
+                        <div class="timeline-date">انستا ومسانجر وكول وفوق الارض وتحت البحر </div>
+                        <h2>اقل كول بينا</h2>
+                        <p>طول الوقت</p>
+                    </div>
+                    
+                </div>
+                <div class="timeline-item" style="flex: 0 0 300px; min-width: 300px;">
+                    <div class="timeline-dot">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <img src="Domna.jpg" alt="Adventure" class="timeline-image">
+                        <div class="timeline-date">شربت حجرين علي الشيشا</div>
+                        <h2>روقااان الضمنه غيررر برضو</h2>
+                        <p>ولكن تذكري دايما ان عمرك ما تكسبيني</p>
+                    </div>
+                    
+                </div>
+                <div class="timeline-item" style="flex: 0 0 300px; min-width: 300px;">
+                    <div class="timeline-dot">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <img src="Esraaa.jpg" alt="Adventure" class="timeline-image">
+                        <div class="timeline-date">صوره قديمه لقيتها </div>
+                        <h2>بس حاسسها تحفه بصراحه</h2>
+                        
+                    </div>
+                    
+                </div>
+                <div class="timeline-item" style="flex: 0 0 300px; min-width: 300px;">
+                    <div class="timeline-dot">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <img src="esraa3.jpg" alt="Adventure" class="timeline-image">
+                        <div class="timeline-date">كان لابد من وجود تغفيله</div>
+                        <h2>اسف</h2>
+                        <p>صوره مميزه برضو وانتي ماسكه فيا علشان منزلش من العربيه</p>
+                        
+                    </div>
+                    
+                </div>
+                    
+                <!-- Add more timeline items with images as needed -->
+            </div>
+        </div>
+    </div>
+
+ <!-- Testimonial Start -->
+    <div class="container-fluid bg-light py-5 my-5" id="testimonial">
+        <div class="container-fluid py-5">
+            <h1 style="color: #2c3e50;" class="display-5 text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Messages for U !</h1>
+            <div class="row justify-content-center">
+                <div class="col-lg-3 d-none d-lg-block">
+                    <div class="testimonial-left h-100">
+                        <img class="img-fluid wow fadeIn" data-wow-delay="0.1s" src="Shahd.png" alt="">
+                        <img class="img-fluid wow fadeIn" data-wow-delay="0.3s" src="Me.png" alt="">
+                        <img class="img-fluid wow fadeIn" data-wow-delay="0.5s" src="img/testimonial-3.jpg" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="35s">
+                    <div class="owl-carousel testimonial-carousel">
+                        <div class="testimonial-item text-center">
+                            <div class="position-relative mb-5">
+                                <img class="img-fluid rounded-circle border border-secondary p-2 mx-auto" src="salma_mohamed_amin.Png" alt="">
+                                <div class="testimonial-icon">
+                                    <i class="fa fa-quote-left text-primary"></i>
+                                </div>
+                            </div>
+                            <p class="fs-5 fst-italic">حب حياتي واكتر واحده مزه شوفتها ف حياتي 😍كل سنه وانتي طيبه يعيوني وسنين العمر كلها وانتي معانا يارب بحبك موت موت موت 💞
+                            </p>
+                            <hr class="w-25 mx-auto">
+                            <h5>salma mohamed amin
+                            </h5>
+                            <span>Friend</span>
+                        </div>
+                        <div class="testimonial-item text-center">
+                            <div class="position-relative mb-5">
+                                <img class="img-fluid rounded-circle border border-secondary p-2 mx-auto" src="shreen.png" alt="">
+                                <div class="testimonial-icon">
+                                    <i class="fa fa-quote-left text-primary"></i>
+                                </div>
+                            </div>
+                            <p class="fs-5 fst-italic">كل سنه وانتي طيبه ي سوسو وعقبال سنين كتير حلوه وانتي محققه كل الي بتتمنيه يارب واشوفك احسن حد ف الدنيا يارب🥹🫂🫂🫂♥️
+                            </p>
+                            <hr class="w-25 mx-auto">
+                            <h5>شيري🥹♥️</h5>
+                            <span>Friend</span>
+                        </div>
+                        <div class="testimonial-item text-center">
+                            <div class="position-relative mb-5">
+                                <img class="img-fluid rounded-circle border border-secondary p-2 mx-auto" src="Habiba_Morshdi.png" alt="">
+                                <div class="testimonial-icon">
+                                    <i class="fa fa-quote-left text-primary"></i>
+                                </div>
+                            </div>
+                            <p class="fs-5 fst-italic">بجد مش مسدج عيد ميلاد وخلاص بس انتي اجمل وارق بنوته ف الدنيا وبجد بحس ب طاقه غريبه وانا قاعده معاكي ربنا يخليكي يارب وكل سنه وانتي طيبه وعقبال سنين كتيره  ومنوره حياتنا ويارب تحققي اللي نفسك فيه واشوفك اجمل برايد 💙</p>
+                            <hr class="w-25 mx-auto">
+                            <h5>Habiba Morshdi</h5>
+                            <span>Friend</span>
+                        </div>
+                        <div class="testimonial-item text-center">
+                            <div class="position-relative mb-5">
+                                <img class="img-fluid rounded-circle border border-secondary p-2 mx-auto" src="Esraa_walid.png" alt="">
+                                <div class="testimonial-icon">
+                                    <i class="fa fa-quote-left text-primary"></i>
+                                </div>
+                            </div>
+                            <p class="fs-5 fst-italic">اسراء بجد من اقرب الناس ليا وهي عارفه كدا اصحاب لجنه من واحنا في إعدادي واكتر حد يرتاح معاه في الكلام وبجيب معاه القديم واللي فاتها كلو من اول ما بنقعد شخصيه عمري ما حستها مصطنعه بالعكس بحسها اكتر شخص حقيقي وبنفضل أنا وهي نضحك ع خبيتنا 😂🫶كل سنه وانتي طيبه يااحلي اسراء في الدنيا واشوفك علطول مرتاحه ومبسوطه ومحققه كل اللي بتتمنيه بحبك 💖
+                            </p>
+                            <hr class="w-25 mx-auto">
+                            <h5>Esraa walid
+                            </h5>
+                            <span>Friend</span>
+                        </div>
+                        <div class="testimonial-item text-center">
+                            <div class="position-relative mb-5">
+                                <img class="img-fluid rounded-circle border border-secondary p-2 mx-auto" src="Sara_Yasser.png" alt="">
+                                <div class="testimonial-icon">
+                                    <i class="fa fa-quote-left text-primary"></i>
+                                </div>
+                            </div>
+                            <p class="fs-5 fst-italic">
+                                هاي يسرسوره بما انك كدا كدا هتكوني بتشوفي المسدج دي وقت عيد ميلادك ف حابه أقولك اني مبسوطة عامة ان جاتلي الفرصة اشارك ف الفكرة اللطيفة دي😭
+                                مش بنشوف بعض كتير ومش بنتكلم كتير بس حقيقي انتي غالية ع قلبي فعلا أتمني المسدج دي توصلك لو جزء من غلاوتك دي🫶
+                                هابي بيرث داي ليكي يسرسورة يارب تبقي سنة سعيدة عليكي وكلها انجازات وحاجات تحبي تحققيها فيها💗
+                                 شكرا انك كنتي سبورت ليا ف أوقات كنت محتاجة دا فعلا فيها💗
+                                I wish you all the happiness بجد بجد🫂💗💗
+                                </p>
+                            <hr class="w-25 mx-auto">
+                            <h5>Sara Yasser</h5>
+                            <span>Friend</span>
+                        </div>
+                        <div class="testimonial-item text-center">
+                            <div class="position-relative mb-5">
+                                <img class="img-fluid rounded-circle border border-secondary p-2 mx-auto" src="Asmaa.png" alt="">
+                                <div class="testimonial-icon">
+                                    <i class="fa fa-quote-left text-primary"></i>
+                                </div>
+                            </div>
+                            <p class="fs-5 fst-italic">كل سنه وانتي طيبه ي سرسور وسنين العمر كلها في هنا وسعاده مع انا على طول ناقر ونقير بس بحبك موت 
+                                “Happy Birthday, my dear friend! Here’s to another year of laughter, craziness, and unforgettable memories!
+                                “Wishing you the happiest birthday ever! You’re not just a friend, you’re family❤️🫂
+                            </p>
+                            <hr class="w-25 mx-auto">
+                            <h5>Asmaa   </h5>
+                            <span>Friend</span>
+                        </div>
+                        <div class="testimonial-item text-center">
+                            <div class="position-relative mb-5">
+                                <img class="img-fluid rounded-circle border border-secondary p-2 mx-auto" src="resized_image (1).png" alt="">
+                                <div class="testimonial-icon">
+                                    <i class="fa fa-quote-left text-primary"></i>
+                                </div>
+                            </div>
+                            <p class="fs-5 fst-italic">السرسور حجي🫣كل سنه وانتي طيبة يكتكوتة قلبي ي صغننه انتي،كل سنه وانتي اجمل بنوته قابلتها ف حياتي، وكل سنه وانتي منوره حياتي يعم🩷✨
+                                حبيبة قلبي وأيامي، الحضن الدافي ال لما بقعد وبحكي معاها مبحسش بالوقت، الشخص ال بقعد معاه مبحتاجش أفكر انا عاوزه اقول اي او هتفهمني صح ولا غلط بالعكس بحكي وانا متأكدة انك هتفهمي انا عاوزه اقول اي، حقيقي انا بحبك جداا وبموت فيكي، ربنا يعلم غلاوتك عندي، وقد اي انا ببقي مبسوطه اووي لما بنقعد وبنحكي سوا ونقضي وقت مع بعض، فكرة ان قربت اتخرج دي مزعلاني جدا لان حقيقي هفتقدك اوووووي وهفتقد كل حاجه حلوه عملناها سوا وهفتقد قعدتنا وأيامنا م متخيلة الايام هتعدي ازاي من غيرك ومن غير وجودك ولما ابقي زعلانه هروح لمين ومبن هيقعد يسمعني ويهزأني عشان مباخدش موقف من حاجه، انا اه الكبيرة، بس لما بقعد معاكي بحس انك انتي الكبيرة، بعرف احكي معاكي، انا م هعرف اصاحب حد زيك تاني ي ايسو، وم هعرف احب حد زيك، مفتقداكي من دلوقتي اقسم بالله، كلام الدنيا كله قليل ف حقك مهما اتكلم م هعرف اعبر عن حبي ليكي وربنا، بس ماما ف مرة قالتلي الكلام ال خارج من القلب بيوصل للقلب علطول ف عشان كدا انا عارفه متأكدة انه هيوصلك زي م  انا عاوزه، بجد ربنا يوفقك ف حياتك الحاية كلها ويسعد ايامك العسلية ي عسلية انتي كل سنه وانتي معايا دايما وانا قرفاكي وقاعدة علي قلبك ومربعة كمان🥹🩷✨عقبال ال100سنه يعمري🩷✨
+                                H. B. D. ya 2lpy🥹🩷🩷🩷🩷🩷🩷🩷🩷🩷🩷🩷🩷✨</p>
+                                <!-- <a href="">video from Ashraqat for you</a> -->
+                                <video width="300px" height="200" controls >
+                                    <source src="AshraqatVedio.mp4" type="video/mp4">  
+                                    المتصفح بتاعك لا يدعم عرض الفيديو.
+                                  
+                                </video>
+                            <hr class="w-25 mx-auto">
+                            <h5>Ashraqat 
+                            </h5>
+                            <span>Friend</span>
+                        </div>
+                        <div class="testimonial-item text-center">
+                            <div class="position-relative mb-5">
+                                <img class="img-fluid rounded-circle border border-secondary p-2 mx-auto" src="Menna.png" alt="">
+                                <div class="testimonial-icon">  
+                                    <i class="fa fa-quote-left text-primary"></i>
+                                </div>
+                            </div>
+                            <p class="fs-5 fst-italic">مش عارفه اعبر ازاي واقول ايه فجأه ظهرتي فحياتي ومفكره ان أنا السبب ف الكليه اللي انتي فيها دي وبتحسبني عليا بس والله ما عملت حاجه😭😂
+                                بجد انتي من اغلي الناس اللي في حياتي ومعرفش أنا واثقه فيكي كده ازاي أنا بتكلم معاكي اكني بتكلم مع نفسي وبكون علي راحتي معاكي بطريقه غريبه أنا بحبك اوي يا إسراء عشان انتي بجد وقفتي معايا في حاجات كتير اوي صعبه واستحملتي خبطي علي باب سكنك الساعه ٣ الفجر عشان عشان احكيلك حاجه تافهه أو اصيح ب اي حاجه وعمري ماحسيت إني تقيله عليكي أبدا أو انك زهقانه مني أنا ممتنه للسكن والكليه عشان خلوني يكون عندي صاحبه زيك جدعه وطيبه وحنية الدنيا كلها فيكي ربنا يخليكي ليا ياسرسور أنا بحبك اوي♥️
+                                مش لاقيه صور لينا حطيتك صوره ليا ابقي قوليلي رأيك بقا🙈😂
+                                
+                            </p>
+                            <hr class="w-25 mx-auto">
+                            <h5>Menna 
+                            </h5>
+                            <span>Your Close Friend</span>
+                        </div>
+                        <div class="testimonial-item text-center">
+                            <div class="position-relative mb-5">
+                                <img class="img-fluid rounded-circle border border-secondary p-2 mx-auto" src="Rawan.png" alt="">
+                                <div class="testimonial-icon">
+                                    <i class="fa fa-quote-left text-primary"></i>
+                                </div>
+                            </div>
+                            <p class="fs-5 fst-italic">هالو يا إيسو حقيقي مش عارفة اكتب و لا اقول ايه لأنك عارفة كويس مليش في جو الكلمتين الحلوين دول بس ممكن اقول اني اتعرفت عليكي من وقت صغير اوي و بقيتي في الوقت ده من اقرب الناس ليا و اكتر حد بيفهمني ،حقيقي استحملتي عته كتير اوي مني و فعلا وقفتي جنبي في وقت كنت محتاجة اليسمعني و يفهمني فيه و انتي عملتي ده و تاخدي جايزة عليه و بجدارة ،يمكن انتي من الطف الناس القبلتها و الذهم حقيقي بحب لحظتنا الهبلة مع بعض سواء في الشغل أو براه و يمكن انتي بجد اكتر حد مهون عليا الشغل بكل حواراته و مهونة عليا الحياة في العموم بجد محتاجة اقولك شكرا على وجودك في رحلتي و انك من غير متحسي بتخليها اسهل كتير
+                            </p>
+                            <hr class="w-25 mx-auto">
+                            <h5>Rawan Wael
+                            </h5>
+                            <span>Friend</span>
+                        </div>
+                        <div class="testimonial-item text-center">
+                            <div class="position-relative mb-5">
+                                <img class="img-fluid rounded-circle border border-secondary p-2 mx-auto" src="Shahd.png" alt="">
+                                <div class="testimonial-icon">
+                                    <i class="fa fa-quote-left text-primary"></i>
+                                </div>
+                            </div>
+                            <p class="fs-5 fst-italic">
+                                تقريبا من بعد ما اتقابلنا وأنا أوبشن الصحاب عندي لأي حد معدتش موجود، الموضوع حقيقي أصعب من ما أي حد يتخيل جيتي مليتي عندي كل حاجه كانت ناقصاني لدرجه أن كل الصحاب بالنسبالي ناس عاديه جدا حتي كلمه صحاب لينا بقت سطحيه جدا جدا
+                                بجد مش بنسي أبدا كل لحظه كنتي فيها جنبي في مناسبات العيله كلها فرح وحزن أو حتي وأنا مش في المود لأي سبب حتي كل الحجات التافهة  لو حاجه بتحصل عندنا ومبتبقيش موجوده فيها كلو بيسأل عليكي وبحس ان أنا لوحدي اوي لما بس تغيبي عني يومين 
+                                إنتي أسرار بالنسبالي وأختي التالته وصاحبه عمري
+                                كل يوم وكل ثانيه مش كل سنه وانتي بخير وبصحه ومبسوطه وناجحه ومحبوبه ربنا يخليكي ليا ولكل اللي بيحبوكي يارب وأشوفك أشطر واحده في الدنيا كلها ياسوسو 🫂
+                                 </p>
+                            <hr class="w-25 mx-auto">
+                            <h5>Shahd
+                            </h5>
+                            <span>Friend</span>
+                        </div>
+                        <div class="testimonial-item text-center">
+                            <div class="position-relative mb-5">
+                                <img class="img-fluid rounded-circle border border-secondary p-2 mx-auto" src="Shrouk.png" alt="">
+                                <div class="testimonial-icon">
+                                    <i class="fa fa-quote-left text-primary"></i>
+                                </div>
+                            </div>
+                            <p class="fs-5 fst-italic">سرسورة 🩷
+                                كل سنة وانتي طيبة يا كتكوتة و عقبال سنين كتير في سعادة يارب و تحققي كل اللي بتتمنيه 🩷✨🥰
+                                بعيدا انك اكتر حد بيشلني بأسئلته يعني بس كدة كدة بحبك 😂🩷 Happy birthday Sarsoraa 🎂🎂🎈
+                            </p>
+                            <hr class="w-25 mx-auto">
+                            <h5>Shrouk
+                            </h5>
+                            <span>Friend</span>
+                        </div>
+                        <div class="testimonial-item text-center">
+                            <div class="position-relative mb-5">
+                                <img class="img-fluid rounded-circle border border-secondary p-2 mx-auto" src="Dailia.png" alt="">
+                                <div class="testimonial-icon">
+                                    <i class="fa fa-quote-left text-primary"></i>
+                                </div>
+                            </div>
+                            <p class="fs-5 fst-italic">
+                                Hi,
+أتمنى يومك يوم لذيذ وطعم زى ضحكتك 
+كل سنة و انتِ من ألطف وأجمل الناس اللى عرفتهم حقيقي 
+أوسكار فى اكتر انسان ريأكشاناته تحفه😂فى كل المواقف بجد
+انسان عسول وتلقائي اووووووي😂وضحكتك بتموتنى 
+ولما تسأليني ع الموضوع اياه وأقولك لاا😂وميعجبكيش الرد بتاخدى وضعيه صدمه ٣ثوانى وبعدين بتضحكي وتهزرى 
+روحك حلوة وقضيت معاكِ لحظات عسولة هتبقي من اللحظات اللى فعلا هشتاقلها لما اتخرج وافتحلك بليل واقولك اتأخرتي ليه مش هفتحلك واقولك كل يوم خلى بالك من نفسك اوعي تتخطفي  والطف شخص يتخرج معاه بجد والجو بيكون لطيف معاكِ وهادي   
+شكلك عسول حاجه كدا بيرفكت  واوفر دوز كياته بالايلاينر التحفه بتاعك ده 
+من الناس القليلة عندي اللى بحب اشوف الاستورى بتاعهم بجد 
+بجد بحبك أوي وبتمنالك كل خير ومستقبل زى اللى فى دماغك وأحلى بمشيئة ربنا ويكون  محاوطك بكل خير ليكِ وعافية 
+واشوفك من أنجح الناس فى مجالك وتفضلي طموحه 
+خليكِ بخير وركزى على نفسك وحياتك اللى بينا ذكريات كتير حلوة 
+                            </p>
+                            <hr class="w-25 mx-auto">
+                            <h5>Dalia El sharkawi 
+                            </h5>
+                            <span>Friend</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 d-none d-lg-block">
+                    <div class="testimonial-right h-100">
+                        <img class="img-fluid wow fadeIn" data-wow-delay="0.1s" src="Habiba_Morshdi.png" alt="">
+                        <img class="img-fluid wow fadeIn" data-wow-delay="0.3s" src="Menna.png" alt="">
+                        <img class="img-fluid wow fadeIn" data-wow-delay="0.5s" src="Rawan.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Testimonial End -->
+
+
+    
+
+    
+
+
+    <!-- Copyright Start -->
+    <div class="container-fluid bg-dark text-white py-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        &copy; <a class="border-bottom text-secondary" href="#">From Ahmed to you</a>, All Right Reserved.
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <!--/*** This template is free as long as you keep the footer author's credit link/attribution link/backlink. If you'd like to use the template without the footer author's credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                        Designed By <a class="border-bottom text-secondary" href="#">Ahmed Yasser</a>
+                        <br>Distributed By: <a class="border-bottom" href="#" target="_blank">Ahmed Yasser Brdo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    <div class="Boox">
+        <div class="modal-container">
+            <div class="modal-content">
+                <div class="close-btn">&times;</div>
+                <div class="modal-text">
+                    <p>دا عيد ميلادك عادي خالص</p>
+                    <p>بس مش عادي بقي عارفه لي؟</p>
+                    <h3>علشان انتي عارفه مهندس(اللي هوا انا يعني)</h3>
+                </div>
+                <button class="close-btn-text">شكرررا يا مهندسس(العفو)</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.querySelector(".close-btn").addEventListener("click", function() {
+            document.querySelector(".modal-container").style.display = "none";
+        });
+    
+        document.querySelector(".close-btn-text").addEventListener("click", function() {
+            document.querySelector(".modal-container").style.display = "none";
+        });
+    </script>
+<!-- <script>let currentSlide = 0;
+    const slides = document.querySelectorAll('.memory-slide');
+    const totalSlides = slides.length;
+    
+    document.querySelector('.memory-next').addEventListener('click', () => {
+      changeSlide(1);
+    });
+    
+    document.querySelector('.memory-prev').addEventListener('click', () => {
+      changeSlide(-1);
+    });
+    
+    function changeSlide(direction) {
+      slides[currentSlide].classList.remove('active-slide');
+      currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+      slides[currentSlide].classList.add('active-slide');
+    }
+    </script> -->
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script> -->
+    <script src="lib/wow/wow.min.js"></script>
+    <!-- <script src="lib/easing/easing.min.js"></script> -->
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/typed/typed.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/isotope/isotope.pkgd.min.js"></script>
+    <!-- <script src="lib/lightbox/js/lightbox.min.js"></script> -->
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,226 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+}
+
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.form-box {
+    position: relative;
+    width: 400px;
+    height: 450px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.form-box:hover {
+    transform: translateY(-5px);
+}
+
+h2 {
+    font-size: 2.5em;
+    color: #fff;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    margin-bottom: 5px;
+    animation: fadeInDown 1s ease;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+h2:first-child {
+    font-size: 3em;
+    background: linear-gradient(45deg, #fff, #ffd700);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0;
+    text-shadow: none;
+}
+
+h2:last-child {
+    font-size: 3.5em;
+    color: #fff;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+    margin-top: 0;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #ffd700;
+    }
+    to {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ffd700;
+    }
+}
+
+.form-value {
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+}
+
+.form-value form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.inputbox {
+    position: relative;
+    margin: 30px 0;
+    width: 310px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+}
+
+.inputbox:focus-within {
+    border-bottom-color: #fff;
+    transform: scale(1.02);
+}
+
+.inputbox label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    color: #fff;
+    font-size: 1em;
+    pointer-events: none;
+    transition: 0.5s;
+}
+
+input:focus~label,
+input:valid~label {
+    top: -5px;
+    font-size: 0.8em;
+    color: #fff;
+}
+
+.inputbox input {
+    width: 100%;
+    height: 50px;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    padding: 0 35px 0 5px;
+    color: #fff;
+}
+
+.inputbox ion-icon {
+    position: absolute;
+    right: 8px;
+    color: #fff;
+    font-size: 1.2em;
+    top: 20px;
+    transition: transform 0.3s ease;
+}
+
+.inputbox:focus-within ion-icon {
+    transform: scale(1.2);
+}
+
+button {
+    width: 100%;
+    height: 45px;
+    border-radius: 40px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    outline: none;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    color: #fff;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px); 
+}
+
+button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* استثناء خاص بالـ input من نوع date */
+input[type="date"]~label {
+    top: -25px;
+    font-size: 0.9em;
+    color: #fff;
+}
+
+input[type="date"] {
+    color: #fff;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+}
+
+/* إضافة تأثير نبض للزر عند التحميل */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+button {
+    animation: pulse 2s infinite;
+}
+
+/* تحسين التجاوب مع الشاشات الصغيرة */
+@media screen and (max-width: 480px) {
+    .form-box {
+        width: 90%;
+        height: auto;
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 1.8em;
+    }
+
+    .inputbox {
+        width: 100%;
+    }
+}

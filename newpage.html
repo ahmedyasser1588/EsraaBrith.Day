@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Birthday Login</title>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <link rel='stylesheet' href='login/index.css'>
+</head>
+
+<body>
+    <section>
+        <div class="form-box">
+            <div class="form-value">
+                <form onsubmit="checkLogin(event)">
+                    <h2>Are You Esraa?</h2>
+                    <h2>Really!</h2>
+                    <h2>Prove it!</h2>
+
+                    <div class="inputbox">
+                        <ion-icon name="person-outline"></ion-icon>
+                        <input type="text" id="name" required>
+                        <label>Your Name</label>
+                    </div>
+
+                    <div class="inputbox">
+                        <ion-icon name="calendar-outline"></ion-icon>
+                        <input type="date" id="date" required>
+                        <label>Birthday Date</label>
+                    </div>
+
+                    <button type="submit">
+                        <ion-icon name="gift-outline" style="margin-right: 5px;"></ion-icon>
+                        Enter
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function checkLogin(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const date = document.getElementById('date').value;
+
+            if (name === 'Saqr Basha' && date === '2005-05-05') {
+                window.location.href = "welcome.html";    
+            } else {
+                let errorMessage = document.createElement('p');
+                errorMessage.textContent = 'Oops! Try again!';
+                errorMessage.style.color = '#fff';
+                errorMessage.style.fontSize = '16px';
+                errorMessage.style.marginTop = '15px';
+                errorMessage.style.textAlign = 'center';
+                errorMessage.style.animation = 'fadeIn 0.5s ease';
+
+                const form = document.querySelector('form');
+                const existingError = form.querySelector('p');
+                if (!existingError) {
+                    form.appendChild(errorMessage);
+                }
+
+                // Add shake animation to the form
+                const formBox = document.querySelector('.form-box');
+                formBox.style.animation = 'shake 0.5s ease-in-out';
+                setTimeout(() => {
+                    formBox.style.animation = '';
+                }, 500);
+            }
+        }
+    </script>
+</body>
+
+</html>
